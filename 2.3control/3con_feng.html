@@ -1,0 +1,14 @@
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.2/dist/hanzi-writer.min.js"></script>
+<div id="character-target-div"></div>
+<script>
+var writer = HanziWriter.create('character-target-div', '逢', {
+  width: 150,
+  height: 150,
+  showCharacter: false,
+  padding: 5,
+  highlightOnComplete: false,
+  showHintAfterMisses: 1
+});
+writer.quiz();
+
+</script>

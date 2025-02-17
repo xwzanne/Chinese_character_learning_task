@@ -1,0 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.2/dist/hanzi-writer.min.js"></script>
+<div id="character-target-div"></div>
+<script>
+
+function recurStroke(startStroke, endStroke){
+    if(startStroke > endStroke){
+       return
+    }
+    writer.animateStroke(startStroke, options = {
+        onComplete: function(){
+            recurStroke(startStroke+1, endStroke);
+        }
+    });
+}
+
+
+var writer = HanziWriter.create('character-target-div', '愣', {
+  width: 150,
+  height: 150,
+  showCharacter: false,
+  padding: 5,
+  strokeAnimationSpeed: 0.4
+});
+
+recurStroke(3, 7);
+
+ 
+</script>

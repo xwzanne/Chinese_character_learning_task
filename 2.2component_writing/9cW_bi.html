@@ -1,0 +1,67 @@
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.2/dist/hanzi-writer.min.js"></script>
+<div style="width: 100%;">
+    <div id='left-wrapper' style="height: 200px; float: left">
+    </div>
+    <div id="char-practice" style="height: 200px"> 
+    </div>
+</div>
+
+<script>
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function recurStroke(w, startStroke, endStroke){
+    if(startStroke > endStroke){
+    return
+    }
+    w.animateStroke(startStroke, options = {
+        onComplete: function(){
+            recurStroke(w, startStroke+1, endStroke);
+        }
+    });
+}
+
+async function runLeft() {
+
+    const strokePoints = [
+          [0, 5],
+          [6, 12],
+          [13, 16]
+    ];
+
+    for(var i=0; i < strokePoints.length; i++){
+        var pair = strokePoints[i];
+        var writer = HanziWriter.create("left-wrapper", '臂', {
+            width: 150,
+            height: 150,
+            showCharacter: false,
+            padding: 5,
+            strokeAnimationSpeed: 0.4,
+        });
+        recurStroke(writer, pair[0], pair[1]);
+        await sleep((pair[1]-pair[0]+1) * 2000 +2000);
+        if(i < strokePoints.length-1){
+            document.getElementById("left-wrapper").innerHTML = "";
+        }
+    }
+}
+
+
+var writerPractice = HanziWriter.create('char-practice', '臂', {
+    width: 150,
+    height: 150,
+    showCharacter: false,
+    padding: 5,
+    highlightOnComplete: false,
+});
+
+writerPractice.quiz();
+
+runLeft();
+
+
+
+ 
+</script>
